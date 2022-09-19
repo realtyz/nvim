@@ -47,5 +47,10 @@ nvim_tree.setup({
             -- 打开文件时关闭
             quit_on_open = true,
         },
-    }
+    },
+    update_cwd = true,
+    update_focused_file = {
+      enable = true,
+      update_cwd = true,
+    },
 })
