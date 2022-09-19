@@ -1,29 +1,26 @@
 -- utf8
 vim.g.encoding = "UTF-8"
 vim.o.fileencoding = 'utf-8'
--- jkhl 移动时光标周围保留8行
+-- jkhl 
 vim.o.scrolloff = 8
 vim.o.sidescrolloff = 8
--- 使用相对行号
+-- use relative row number
 vim.wo.number = true
 vim.wo.relativenumber = true
--- 高亮所在行
+-- highlight the line where the cursor locate
 vim.wo.cursorline = true
 -- 显示左侧图标指示列
 vim.wo.signcolumn = "yes"
--- 右侧参考线，超过表示代码太长了，考虑换行
+-- reference line
 vim.wo.colorcolumn = "120"
--- 缩进2个空格等于一个Tab
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftround = true
--- >> << 时移动长度
-vim.o.shiftwidth = 2
-vim.bo.shiftwidth = 2
--- 空格替代tab
-vim.o.expandtab = true
-vim.bo.expandtab = true
+-- 缩进4个空格等于一个Tab
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
+vim.o.shiftround = true
+vim.o.shiftwidth = 4
+-- don't replace <tab> with <whitespace>
+vim.o.expandtab = false
 -- 新行对齐当前行
 vim.o.autoindent = true
 vim.bo.autoindent = true

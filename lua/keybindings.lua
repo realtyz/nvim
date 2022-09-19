@@ -24,22 +24,57 @@ map("n", "<leader>bc", ":BufferLinePickClose<CR>", opt)
 map("n", "<A-m>", ":NvimTreeToggle<CR>", opt)
 -- 列表快捷键
 pluginKeys.nvimTreeList = {
-  -- 打开文件或文件夹
-  { key = {"<CR>", "o", "<2-LeftMouse>"}, action = "edit" },
-  -- 分屏打开文件
-  { key = "v", action = "vsplit" },
-  { key = "h", action = "split" },
-  -- 显示隐藏文件
-  { key = "i", action = "toggle_custom" }, -- 对应 filters 中的 custom (node_modules)
-  { key = ".", action = "toggle_dotfiles" }, -- Hide (dotfiles)
-  -- 文件操作
-  { key = "<F5>", action = "refresh" },
-  { key = "a", action = "create" },
-  { key = "d", action = "remove" },
-  { key = "r", action = "rename" },
-  { key = "x", action = "cut" },
-  { key = "c", action = "copy" },
-  { key = "p", action = "paste" },
-  { key = "s", action = "system_open" },
+	-- 打开文件或文件夹
+	{ key = {"<CR>", "o", "<2-LeftMouse>"}, action = "edit" },
+	-- 分屏打开文件
+	{ key = "v", action = "vsplit" },
+	{ key = "h", action = "split" },
+	-- 显示隐藏文件
+	{ key = "i", action = "toggle_custom" }, -- 对应 filters 中的 custom (node_modules)
+	{ key = ".", action = "toggle_dotfiles" }, -- Hide (dotfiles)
+	-- 文件操作
+	{ key = "<F5>", action = "refresh" },
+	{ key = "a", action = "create" },
+	{ key = "d", action = "remove" },
+	{ key = "r", action = "rename" },
+	{ key = "x", action = "cut" },
+	{ key = "c", action = "copy" },
+	{ key = "p", action = "paste" },
 }
+
+pluginKeys.mapLSP = function(mapbuf)
+  -- rename
+  mapbuf("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opt)
+  -- code action
+  mapbuf("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opt)
+  -- go xx
+  mapbuf("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opt)
+  mapbuf("n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opt)
+  mapbuf("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opt)
+  mapbuf("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opt)
+  mapbuf("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opt)
+  -- diagnostic
+  mapbuf("n", "gp", "<cmd>lua vim.diagnostic.open_float()<CR>", opt)
+  mapbuf("n", "gk", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opt)
+  mapbuf("n", "gj", "<cmd>lua vim.diagnostic.goto_next()<CR>", opt)
+  mapbuf("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opt)
+end
+
+-- nvim-cmp 自动补全
+pluginKeys.cmp = function(cmp)
+	return {
+		-- 出现补全
+		["<A-l>"] = cmp.mapping(cmp.mapping.complete(), {"i", "c"}),
+		-- 上一个
+		["<Up>"] = cmp.mapping.select_prev_item(),
+		-- 下一个
+		["<Down>"] = cmp.mapping.select_next_item(),
+		-- 确认
+		["<CR>"] = cmp.mapping.confirm({
+			select = true,
+			behavior = cmp.ConfirmBehavior.Replace
+		}),
+	}
+end
+
 return pluginKeys

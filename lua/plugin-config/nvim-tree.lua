@@ -8,9 +8,9 @@ end
 local list_keys = require('keybindings').nvimTreeList
 nvim_tree.setup({
     -- 不显示 git 状态图标
-    git = {
-        enable = false,
-    },
+--    git = {
+--        enable = false,
+--    },
     -- project plugin 需要这样设置
     update_cwd = true,
     update_focused_file = {
@@ -54,3 +54,9 @@ nvim_tree.setup({
       update_cwd = true,
     },
 })
+
+-- close vim while the nvim-tree becomes the last window
+vim.cmd([[
+  autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
+]])
+
