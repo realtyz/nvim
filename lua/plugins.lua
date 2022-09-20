@@ -43,6 +43,7 @@ require('packer').startup({
 	use 'hrsh7th/cmp-buffer' -- { name = 'buffer' },
 	use 'hrsh7th/cmp-path' -- { name = 'path' }
 	use 'hrsh7th/cmp-cmdline' -- { name = 'cmdline' }
+	use 'rafamadriz/friendly-snippets'
 	-- themes
     use 'folke/tokyonight.nvim'
     use {

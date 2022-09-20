@@ -1,6 +1,11 @@
 local cmp = require("cmp")
 
 cmp.setup({
+	snippet = {
+		expand = function(args)
+			vim.fn["vsnip#anonymous"](args.body)
+		end,
+	},
 	-- 补全源
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
@@ -15,7 +20,7 @@ cmp.setup({
 
 		-- -- For snippy users.
 		-- { name = 'snippy' },
-	}, { { name = "buffer" }, { name = "path" } }),
+		}, { { name = "buffer" }, { name = "path" } }),
 
 	-- 快捷键设置
 	mapping = require("keybindings").cmp(cmp),
@@ -34,7 +39,7 @@ cmp.setup.cmdline(":", {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
 		{ name = "path" },
-	}, {
+		}, {
 			{ name = "cmdline" },
-		}),
+	}),
 })
